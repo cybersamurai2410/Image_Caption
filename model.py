@@ -51,31 +51,37 @@ class DecoderRNN(nn.Module):
 class CNNtoRNN(nn.Module):
     def __init__(self, embed_size, hidden_size, vocab_size, num_layers):
         super(CNNtoRNN, self).__init__()
-        self.encoderCNN = EncoderCNN(embed_size)
-        self.decoderRNN = DecoderRNN(embed_size, hidden_size, vocab_size, num_layers)
+        self.encoderCNN = EncoderCNN(embed_size) # Encoder part which uses a CNN architecture to extract features from the image
+        self.decoderRNN = DecoderRNN(embed_size, hidden_size, vocab_size, num_layers) # Decoder part which uses an RNN architecture to generate captions from the features
 
     def forward(self, images, captions):
-        features = self.encoderCNN(images)
-        outputs = self.decoderRNN(features, captions)
+        features = self.encoderCNN(images) # Extract features from the image using the encoder
+        outputs = self.decoderRNN(features, captions) # Generate captions from the features using the decoder
 
         return outputs
 
+    # This function generates a caption for a given image
     def caption_image(self, image, vocabulary, max_length=50):
-        result_caption = []
+        result_caption = [] # List to hold the generated caption
 
-        with torch.no_grad():
-            x = self.encoderCNN(image).unsqueeze(0)
-            states = None
+        with torch.no_grad(): # Ensure no gradients are calculated during caption generation
+            x = self.encoderCNN(image).unsqueeze(0) # Extract features from the image using the encoder
+            states = None # Initial states for the LSTM
 
+            # Generate caption up to a maximum length
             for _ in range(max_length):
-                hiddens, states = self.decoderRNN.lstm(x, states)
+                hiddens, states = self.decoderRNN.lstm(x, states) # Pass the previous word (or image feature for the first iteration) through the LSTM
+
+                # Get the most probable next word
                 output = self.decoderRNN.linear(hiddens.unsqueeze(0))
                 predicted = output.argmax(1)
 
-                result_caption.append(predicted.item())
-                x = self.decoderRNN.embed(predicted).unsqueeze(0)
+                result_caption.append(predicted.item()) # Append the predicted word's index to the result_caption list
+                x = self.decoderRNN.embed(predicted).unsqueeze(0) # Get the embedding of the predicted word to be the input for the next timestep
 
+                # If the End-Of-Sequence token is predicted, stop generation
                 if vocabulary.itos[predicted.item()] == "<EOS>":
                     break
 
+            # Convert the list of word indices to actual words and return
             return [vocabulary.itos[idx] for idx in result_caption]
