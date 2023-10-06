@@ -24,7 +24,7 @@ with open(mapping_file_path, 'rb') as f:
     mapping = pickle.load(f)
 
 # Load tokenizer
-tokenizer_file_path = os.path.join(base_dir, 'mapping.pkl')
+tokenizer_file_path = os.path.join(base_dir, 'tokenizer.pkl')
 with open(tokenizer_file_path, 'rb') as f:
     tokenizer = pickle.load(f)
 
@@ -35,11 +35,12 @@ with open(metadata_file_path, 'rb') as f:
 max_length = metadata['max_length']
 vocab_size = metadata['vocab_size']
 
-# Split data and load trained model
-image_ids = list(mapping.keys())
-split = int(len(image_ids) * 0.90)
-train = image_ids[:split]
-test = image_ids[split:]
+# Load the test set
+test_file_path = os.path.join(base_dir, 'test_set.pkl')
+with open(test_file_path, 'rb') as f:
+    test = pickle.load(f)
+
+# Load trained model
 model = load_model(r'C:\ADITYA\Computer Science\Python\Image_Caption\models\best_model.h5')
 
 def idx_to_word(integer, tokenizer):
@@ -98,7 +99,7 @@ def generate_caption(image_name):
     # load the image
     # image_name = "1001773457_577c3a7d70.jpg"
     image_id = image_name.split('.')[0]
-    img_path = os.path.join('/kaggle/input/flickr8k', "Images", image_name)
+    img_path = os.path.join(base_dir, "Images", image_name)
     image = Image.open(img_path)
     captions = mapping[image_id]
     print('---------------------Actual---------------------')
@@ -117,7 +118,7 @@ vgg_model = VGG16()
 # restructure the model
 vgg_model = Model(inputs=vgg_model.inputs, outputs=vgg_model.layers[-2].output)
 
-image_path = '/kaggle/input/flickr8k/Images/1000268201_693b08cb0e.jpg'
+image_path = r'C:\ADITYA\Computer Science\Python\Image_Caption\flickr8k\images\667626_18933d713e.jpg'
 # load image
 image = load_img(image_path, target_size=(224, 224))
 # convert image pixels to numpy array
