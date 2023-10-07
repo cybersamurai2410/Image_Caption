@@ -14,6 +14,6 @@ Combine computer vision and natural language processing techniques to automatica
 
 ![model_architecture](https://github.com/cybersamurai2410/Image_Caption/assets/66138996/c33f43a3-d4ef-42c3-8695-caf9e0674b54)
 
-## Metric for Evaluation
+## Evaluation Metrics
 - The performance of the trained model is evaluated using validation loss/accuracy metrics and the BLEU Score and has achieved over 0.5 on average.
 - BLEU (Bilingual Evaluation Understudy) Score is a metric commonly used to assess the quality of machine-generated text by comparing it to reference human-generated text.
