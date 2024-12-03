@@ -24,11 +24,11 @@ The dataset used for this project is Flickr8k and comprises 8,000 images, each a
 
 # Vision-Language 
 Application open-source models from Hugging Face for the vision-language tasks:
-- Image captioning
-- Image retrieval
-- Visual Q&A
+- Image captioning - Output text for input image.
+- Image retrieval - Ouptut similarity score between input image and text.
+- Visual Q&A - Answer questions based on visual context from the image.
 
-[Click to watch demo]()
+[Click to watch demo](https://drive.google.com/file/d/1-giGgXdkIdcofjrkx2nKbFiA8Rk-1R4x/view?usp=sharing)
 
 ## Screenshots
 <img width="536" alt="img_caption" src="https://github.com/user-attachments/assets/5f4bcf2a-cad6-41fa-b81f-4d4eacc908cb">
