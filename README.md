@@ -28,7 +28,8 @@ Application open-source models from Hugging Face for the vision-language tasks:
 - Image retrieval - Ouptut similarity score between input image and text.
 - Visual Q&A - Answer questions based on visual context from the image.
 
-[Click to watch demo](https://drive.google.com/file/d/1-giGgXdkIdcofjrkx2nKbFiA8Rk-1R4x/view?usp=sharing)
+**Links:** [Click to watch demo](https://drive.google.com/file/d/1-giGgXdkIdcofjrkx2nKbFiA8Rk-1R4x/view?usp=sharing) |
+[Test the deployed app via Hugging Face Spaces](https://huggingface.co/spaces/adityas2410/Vision-Language_App)
 
 ## Screenshots
 <img width="536" alt="img_caption" src="https://github.com/user-attachments/assets/5f4bcf2a-cad6-41fa-b81f-4d4eacc908cb">
