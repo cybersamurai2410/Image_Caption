@@ -1,9 +1,9 @@
 from transformers import AutoProcessor, BlipForConditionalGeneration
 from PIL import Image
 
-# Load model and processor
-model = BlipForConditionalGeneration.from_pretrained("./models/Salesforce/blip-image-captioning-base")
-processor = AutoProcessor.from_pretrained("./models/Salesforce/blip-image-captioning-base")
+caption_id = "Salesforce/blip-image-captioning-base"
+caption_model = BlipForConditionalGeneration.from_pretrained(caption_id)
+caption_processor = AutoProcessor.from_pretrained(caption_id)
 
 def image_captioning(image):
     inputs = processor(image, "a photograph of", return_tensors="pt")
