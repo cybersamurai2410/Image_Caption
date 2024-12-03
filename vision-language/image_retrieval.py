@@ -8,14 +8,6 @@ retrieval_model = BlipForImageTextRetrieval.from_pretrained(retrieval_id)
 retrieval_processor = AutoProcessor.from_pretrained(retrieval_id)
 
 def image_retrieval(image_url, text):
-    raw_image = Image.open(requests.get(image_url, stream=True).raw).convert('RGB')
-    inputs = processor(images=raw_image, text=text, return_tensors="pt")
-    itm_scores = model(**inputs)[0]
-    itm_score = torch.nn.functional.softmax(itm_scores, dim=1)
-    probability = itm_score[0][1].item()
-    return f"The image and text are matched with a probability of {probability:.4f}"
-
-def image_retrieval(image_url, text):
     try:
         raw_image = Image.open(requests.get(image_url, stream=True).raw).convert('RGB')
         inputs = retrieval_processor(images=raw_image, text=text, return_tensors="pt")
