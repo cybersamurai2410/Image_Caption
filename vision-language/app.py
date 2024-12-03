@@ -1,7 +1,7 @@
 import gradio as gr
-from tasks.image_caption import image_captioning
-from tasks.image_retrieval import image_retrieval
-from tasks.visual_qa import visual_qa
+from image_caption import image_captioning
+from image_retrieval import image_retrieval
+from visual_qa import visual_qa
 
 # Gradio interfaces
 caption_interface = gr.Interface(
