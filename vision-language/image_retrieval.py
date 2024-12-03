@@ -3,6 +3,7 @@ from PIL import Image
 import requests
 import torch
 
+retrieval_id = "Salesforce/blip-itm-base-coco"
 retrieval_model = BlipForImageTextRetrieval.from_pretrained(retrieval_id)
 retrieval_processor = AutoProcessor.from_pretrained(retrieval_id)
 
