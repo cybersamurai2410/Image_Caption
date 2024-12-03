@@ -1,9 +1,9 @@
 from transformers import AutoProcessor, BlipForQuestionAnswering
 from PIL import Image
 
-# Load model and processor
-model = BlipForQuestionAnswering.from_pretrained("./models/Salesforce/blip-vqa-base")
-processor = AutoProcessor.from_pretrained("./models/Salesforce/blip-vqa-base")
+vqa_id = "Salesforce/blip-vqa-base"
+vqa_model = BlipForQuestionAnswering.from_pretrained(vqa_id)
+vqa_processor = AutoProcessor.from_pretrained(vqa_id)
 
 def visual_qa(image, question):
     inputs = processor(image, question, return_tensors="pt")
