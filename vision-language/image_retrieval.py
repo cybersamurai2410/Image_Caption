@@ -15,21 +15,15 @@ def image_retrieval(image_url, text):
     probability = itm_score[0][1].item()
     return f"The image and text are matched with a probability of {probability:.4f}"
 
-# Image Retrieval
 def image_retrieval(image_url, text):
     try:
-        # Fetch the image from the URL
         raw_image = Image.open(requests.get(image_url, stream=True).raw).convert('RGB')
-        
-        # Process the image and text for retrieval
         inputs = retrieval_processor(images=raw_image, text=text, return_tensors="pt")
         itm_scores = retrieval_model(**inputs)[0]
         itm_score = torch.nn.functional.softmax(itm_scores, dim=1)
         probability = itm_score[0][1].item()
         
-        # Return the image and the matching probability
         return raw_image, f"The image and text are matched with a probability of {probability:.4f}"
     except Exception as e:
-        # Handle any exceptions and display an error message
         return None, f"Error: {str(e)}"
         
